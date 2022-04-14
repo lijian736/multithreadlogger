@@ -40,7 +40,11 @@ bool create_directory_recursively(const std::string &directory)
 		return false;
 	}
 
-	create_directory_recursively(directory.substr(0, directory.rfind('\\')));
+	size_t pos = directory.rfind('\\');
+	if(pos != std::string::npos)
+	{
+		create_directory_recursively(directory.substr(0, pos));
+	}
 	mkdir(directory.c_str());
 	return true;
 #else
